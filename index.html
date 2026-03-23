@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Donation Bridge Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold:    #FFD233;
+    --gold2:   #FF9500;
+    --purple:  #7B5EA7;
+    --dark:    #0A0A14;
+    --dark2:   #0F0F1E;
+    --dark3:   #161628;
+    --text:    #E8E4FF;
+    --muted:   #7A72A8;
+    --green:   #4ADE80;
+    --red:     #F87171;
+    --border:  rgba(123, 94, 167, 0.3);
+  }
+
+  html, body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ── NOISE OVERLAY ─────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ── GRID BACKGROUND ───────────────────────────────────── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── HEADER ─────────────────────────────────────────────── */
+  header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    letter-spacing: 0.1em;
+  }
+
+  .logo-badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  h1 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.05;
+    background: linear-gradient(135deg, #fff 30%, var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  /* ── GRID LAYOUT ─────────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 680px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .card-full { grid-column: 1 / -1; }
+
+  /* ── CARD ────────────────────────────────────────────────── */
+  .card {
+    background: linear-gradient(160deg, var(--dark3), var(--dark2));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(255,210,51,0.04), transparent 60%);
+    pointer-events: none;
+  }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── SERVER CONFIG ───────────────────────────────────────── */
+  .config-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .config-row label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 110px;
+  }
+
+  .config-row input {
+    flex: 1;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 14px;
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .config-row input:focus {
+    border-color: var(--gold);
+  }
+
+  /* ── FORM FIELDS ─────────────────────────────────────────── */
+  .field {
+    margin-bottom: 16px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+
+  .field input, .field textarea {
+    width: 100%;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: none;
+  }
+
+  .field textarea { height: 72px; }
+
+  .field input:focus, .field textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(255, 210, 51, 0.12);
+  }
+
+  /* ── PRESET AMOUNTS ──────────────────────────────────────── */
+  .presets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .preset-btn {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .preset-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(255,210,51,0.06);
+  }
+
+  /* ── SEND BUTTON ─────────────────────────────────────────── */
+  .btn-send {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    border: none;
+    border-radius: 12px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: #0A0A14;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .btn-send:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 149, 0, 0.35);
+  }
+
+  .btn-send:not(:disabled):active { transform: translateY(0); }
+
+  /* ── RESULT BADGE ────────────────────────────────────────── */
+  #result {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    display: none;
+    line-height: 1.5;
+  }
+
+  #result.success {
+    display: block;
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: var(--green);
+  }
+
+  #result.error {
+    display: block;
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.3);
+    color: var(--red);
+  }
+
+  /* ── LOG ─────────────────────────────────────────────────── */
+  #log {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .log-entry {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    animation: fadeSlideIn 0.3s ease;
+  }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .log-entry.ok  { background: rgba(74,222,128,0.07);  border-left: 3px solid var(--green); color: var(--green); }
+  .log-entry.err { background: rgba(248,113,113,0.07); border-left: 3px solid var(--red);   color: var(--red);   }
+  .log-entry.inf { background: rgba(123,94,167,0.1);   border-left: 3px solid var(--purple); color: var(--muted); }
+
+  .log-time { color: var(--muted); margin-right: 8px; }
+
+  /* ── WEBHOOK URL DISPLAY ─────────────────────────────────── */
+  .url-box {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    word-break: break-all;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .url-box:hover { border-color: var(--gold); }
+  .url-box .url-text { flex: 1; }
+  .copy-hint { color: var(--muted); font-size: 11px; white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .badge-get  { background: rgba(74,222,128,0.15);  color: var(--green);  border: 1px solid rgba(74,222,128,0.3); }
+  .badge-post { background: rgba(255,149,0,0.15);   color: var(--gold2);  border: 1px solid rgba(255,149,0,0.3); }
+
+  .endpoint-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .endpoint-row:last-child { border-bottom: none; }
+  .endpoint-path {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+    flex: 1;
+  }
+  .endpoint-desc { font-size: 12px; color: var(--muted); }
+
+  /* ── SPINNER ─────────────────────────────────────────────── */
+  .spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid rgba(0,0,0,0.3);
+    border-top-color: #000;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-badge">⚡ DONATION BRIDGE — ACTIVE</div>
+    <h1>Dashboard<br/>Testing Donasi</h1>
+    <p class="sub">Kirim fake donation ke Roblox via MessagingService</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- SERVER CONFIG -->
+    <div class="card card-full">
+      <div class="card-title">⚙ Konfigurasi Server</div>
+      <div class="config-row">
+        <label>Server URL</label>
+        <input type="text" id="serverUrl"
+          value="https://mapsaweriashinkuparty-production.up.railway.app"
+          placeholder="https://your-server.railway.app" />
+      </div>
+      <div style="margin-top:16px">
+        <div class="card-title" style="margin-bottom:12px">📡 Endpoints</div>
+        <div class="endpoint-row">
+          <span class="badge badge-post">POST</span>
+          <span class="endpoint-path">/webhook/bagibagi</span>
+          <span class="endpoint-desc">Webhook dari BagiBagi</span>
+        </div>
+        <div class="endpoint-row">
+          <span class="badge badge-post">POST</span>
+          <span class="endpoint-path">/test-donation</span>
+          <span class="endpoint-desc">Testing dari dashboard ini</span>
+        </div>
+        <div class="endpoint-row">
+          <span class="badge badge-get">GET</span>
+          <span class="endpoint-path">/</span>
+          <span class="endpoint-desc">Health check</span>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div style="font-size:12px; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.08em; font-weight:700">
+          URL Webhook untuk BagiBagi
+        </div>
+        <div class="url-box" onclick="copyWebhookUrl(this)">
+          <span class="url-text" id="webhookUrl">https://mapsaweriashinkuparty-production.up.railway.app/webhook/bagibagi</span>
+          <span class="copy-hint">📋 Klik untuk copy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM TEST DONATION -->
+    <div class="card">
+      <div class="card-title">🧪 Kirim Test Donation</div>
+
+      <div class="field">
+        <label>Username Donatur</label>
+        <input type="text" id="username" value="TestUser123" placeholder="Nama donatur" />
+      </div>
+
+      <div class="field">
+        <label>Nominal (Rp)</label>
+        <input type="number" id="amount" value="10000" min="1000" step="1000" placeholder="10000" />
+      </div>
+
+      <div class="presets">
+        <span style="font-size:11px;color:var(--muted);align-self:center;margin-right:4px">Preset:</span>
+        <button class="preset-btn" onclick="setAmount(5000)">Rp 5.000</button>
+        <button class="preset-btn" onclick="setAmount(10000)">Rp 10.000</button>
+        <button class="preset-btn" onclick="setAmount(25000)">Rp 25.000</button>
+        <button class="preset-btn" onclick="setAmount(50000)">Rp 50.000</button>
+        <button class="preset-btn" onclick="setAmount(100000)">Rp 100.000</button>
+        <button class="preset-btn" onclick="setAmount(500000)">Rp 500.000</button>
+      </div>
+
+      <div class="field">
+        <label>Pesan (opsional)</label>
+        <textarea id="message" placeholder="Tulis pesan donasi...">Halo! Ini donasi test 🎉</textarea>
+      </div>
+
+      <button class="btn-send" id="sendBtn" onclick="sendTestDonation()">
+        🚀 Kirim ke Roblox
+      </button>
+
+      <div id="result"></div>
+    </div>
+
+    <!-- LOG PANEL -->
+    <div class="card">
+      <div class="card-title" style="justify-content:space-between">
+        <span>📋 Log Aktivitas</span>
+        <button onclick="clearLog()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px;font-family:'Syne',sans-serif">Hapus</button>
+      </div>
+      <div id="log">
+        <div class="log-entry inf">
+          <span class="log-time">--:--:--</span>
+          Dashboard siap. Masukkan server URL lalu kirim test donation.
+        </div>
+      </div>
+    </div>
+
+    <!-- BATCH TEST -->
+    <div class="card card-full">
+      <div class="card-title">⚡ Batch Test — Spam Donasi</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">
+        Kirim beberapa donasi sekaligus untuk menguji antrian notifikasi di Roblox.
+      </p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-send" style="flex:1;min-width:160px" onclick="batchTest(3)">
+          3 Donasi Sekaligus
+        </button>
+        <button class="btn-send" style="flex:1;min-width:160px;background:linear-gradient(135deg,#A78BFA,#7C3AED);color:#fff"
+          onclick="batchTest(5)">
+          5 Donasi Sekaligus
+        </button>
+        <button class="btn-send" style="flex:1;min-width:160px;background:linear-gradient(135deg,#F472B6,#BE185D);color:#fff"
+          onclick="batchTest(10)">
+          10 Donasi (Stress Test)
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* ── UPDATE WEBHOOK URL SAAT SERVER URL BERUBAH ─────────── */
+  document.getElementById('serverUrl').addEventListener('input', function() {
+    const base = this.value.trim().replace(/\/$/, '');
+    document.getElementById('webhookUrl').textContent = base + '/webhook/bagibagi';
+  });
+
+  function getServerUrl() {
+    return document.getElementById('serverUrl').value.trim().replace(/\/$/, '');
+  }
+
+  function copyWebhookUrl(el) {
+    const text = document.getElementById('webhookUrl').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const hint = el.querySelector('.copy-hint');
+      hint.textContent = '✅ Tersalin!';
+      setTimeout(() => hint.textContent = '📋 Klik untuk copy', 1500);
+    });
+  }
+
+  function setAmount(val) {
+    document.getElementById('amount').value = val;
+  }
+
+  /* ── FORMAT RUPIAH ────────────────────────────────────────── */
+  function formatRupiah(n) {
+    return 'Rp ' + parseInt(n).toLocaleString('id-ID');
+  }
+
+  /* ── LOG ──────────────────────────────────────────────────── */
+  function addLog(msg, type = 'inf') {
+    const log  = document.getElementById('log');
+    const time = new Date().toLocaleTimeString('id-ID', { hour12: false });
+    const el   = document.createElement('div');
+    el.className = `log-entry ${type}`;
+    el.innerHTML = `<span class="log-time">${time}</span>${msg}`;
+    log.prepend(el);
+    // Batasi 50 entri
+    while (log.children.length > 50) log.lastElementChild.remove();
+  }
+
+  function clearLog() {
+    document.getElementById('log').innerHTML = '';
+  }
+
+  /* ── KIRIM DONASI ────────────────────────────────────────── */
+  async function sendDonation(username, amount, message, silent = false) {
+    const serverUrl = getServerUrl();
+    const url       = serverUrl + '/test-donation';
+
+    if (!silent) {
+      const btn = document.getElementById('sendBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Mengirim...';
+    }
+
+    try {
+      const resp = await fetch(url, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ username, amount, message }),
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok) throw new Error(data.error || 'Server error ' + resp.status);
+
+      if (!silent) {
+        const res = document.getElementById('result');
+        res.className = 'success';
+        res.innerHTML = `✅ Berhasil dikirim ke Roblox!<br/>
+          <small>👤 ${username} | 💰 ${formatRupiah(amount)}</small>`;
+      }
+
+      addLog(`✅ Donasi dikirim → ${username} | ${formatRupiah(amount)} | "${message}"`, 'ok');
+      return true;
+
+    } catch (err) {
+      if (!silent) {
+        const res = document.getElementById('result');
+        res.className = 'error';
+        res.innerHTML = `❌ Gagal: ${err.message}`;
+      }
+      addLog(`❌ Error: ${err.message}`, 'err');
+      return false;
+    } finally {
+      if (!silent) {
+        const btn = document.getElementById('sendBtn');
+        btn.disabled = false;
+        btn.innerHTML = '🚀 Kirim ke Roblox';
+      }
+    }
+  }
+
+  async function sendTestDonation() {
+    const username = document.getElementById('username').value.trim() || 'TestUser';
+    const amount   = parseInt(document.getElementById('amount').value) || 10000;
+    const message  = document.getElementById('message').value.trim();
+    await sendDonation(username, amount, message);
+  }
+
+  /* ── BATCH TEST ───────────────────────────────────────────── */
+  const BATCH_USERS = [
+    'SakuraNight', 'XxxProGamer', 'NusantaraHero', 'DoraemonFan99',
+    'WarriorJakarta', 'AnakBandung', 'SkylineRider', 'MoonlightCoder',
+    'BatikKreasi', 'PadiKencana',
+  ];
+  const BATCH_MSGS = [
+    'Gas terus kakak! 🔥', 'Semangat streamnya!', 'W push dulu ya!',
+    'Mantap kontennya bro 💪', 'Auto nonton terus nih', 'Gacor selalu!',
+  ];
+  const BATCH_AMOUNTS = [5000, 10000, 15000, 20000, 25000, 50000, 100000];
+
+  async function batchTest(count) {
+    addLog(`⚡ Mengirim ${count} donasi secara bertahap...`, 'inf');
+
+    for (let i = 0; i < count; i++) {
+      const username = BATCH_USERS[Math.floor(Math.random() * BATCH_USERS.length)];
+      const amount   = BATCH_AMOUNTS[Math.floor(Math.random() * BATCH_AMOUNTS.length)];
+      const message  = BATCH_MSGS[Math.floor(Math.random() * BATCH_MSGS.length)];
+
+      await sendDonation(username, amount, message, true);
+      await new Promise(r => setTimeout(r, 600));  // jeda 600ms antar donasi
+    }
+
+    addLog(`✅ Batch ${count} donasi selesai dikirim!`, 'ok');
+  }
+</script>
+</body>
+</html>
