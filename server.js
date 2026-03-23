@@ -15,8 +15,8 @@ app.use(cors());
 
 // ─── CONFIG (isi via Environment Variables di Railway) ───────
 const PORT            = process.env.PORT            || 3000;
-const ROBLOX_API_KEY  = process.env.ROBLOX_API_KEY  || 'YOUR_ROBLOX_API_KEY';
-const UNIVERSE_ID     = process.env.UNIVERSE_ID      || 'YOUR_UNIVERSE_ID';
+const ROBLOX_API_KEY  = process.env.ROBLOX_API_KEY  || 'uggCUWnR3kOygNZW8JkDbxmEAK/z+6b79fnwc6eKY3o8pbTcZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUpTYjJKc2IzaEpiblJsY201aGJDSXNJbWx6Y3lJNklrTnNiM1ZrUVhWMGFHVnVkR2xqWVhScGIyNVRaWEoyYVdObElpd2lZbUZ6WlVGd2FVdGxlU0k2SW5WblowTlZWMjVTTTJ0UGVXZE9XbGM0U210RVluaHRSVUZMTDNvck5tSTNPV1p1ZDJNMlpVdFpNMjg0Y0dKVVl5SXNJbTkzYm1WeVNXUWlPaUkyTXpjeE16ZzNNemtpTENKbGVIQWlPakUzTnpReU16SXhOaklzSW1saGRDSTZNVGMzTkRJeU9EVTJNaXdpYm1KbUlqb3hOemMwTWpJNE5UWXlmUS5LWFN3TGw4VmhrYjRaSDYyZWgyZUM5OXFSdzlzUi1Makt2YkhJdGw1cTVkNjhoZ1ZHTTZMYlMxbmdRR211YUZuR0pJRFg1NGM5Z2c2alU0TVFwbTBsVERFVnBCblVGNVQtZUhqVS1WaU9LQWNidGk5OXdhcDN5dzk3dnlSNDd3Sk5HLThLbzNKX2E0dFd5WW1KQ1pKU2FXckFWSmZlZi1PbXA1OUxNMzRBbF9vUVRGWWJlRjAxNURDZ2c3OU8wcDM5Y3hiRVdsMHdNVXEzYkYtbTBaOW1jazNBRU9oNkZhcnJ1eTNlQ1hVWHhXX0hUOGVDbV9lTW5oZDAtb0VXcHF5N1QwUWJVaVF6ZjkycFd1ZERISmp4SlZ6d0Q0TlFyX0xWeEpRbkg2TW8yX0JjZmhTcFhKdUJwTHZyTXctRTFaclRsMTFaaEZmLXo1SG5xZnM0b1NWWlE=';
+const UNIVERSE_ID     = process.env.UNIVERSE_ID      || '9926763102';
 const WEBHOOK_SECRET  = process.env.WEBHOOK_SECRET   || '';   // optional, untuk verifikasi signature bagibagi
 const TOPIC           = 'DonationNotification';
 // ────────────────────────────────────────────────────────────
