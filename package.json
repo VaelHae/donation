@@ -1,16 +1,17 @@
 {
   "name": "bagibagi-roblox-bridge",
-  "version": "1.0.0",
-  "description": "Webhook bridge: BagiBagi donations → Roblox MessagingService",
+  "version": "2.0.0",
+  "description": "BagiBagi → Roblox Donation Bridge with TTS",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev":   "nodemon server.js"
   },
   "dependencies": {
-    "axios":   "^1.6.0",
-    "cors":    "^2.8.5",
-    "express": "^4.18.2"
+    "axios":     "^1.6.0",
+    "cors":      "^2.8.5",
+    "express":   "^4.18.2",
+    "form-data": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.0"
