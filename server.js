@@ -663,7 +663,7 @@ footer .jp{font-size:18px;color:var(--lacquer);display:block;margin-bottom:6px}
       </svg>
     </div>
 
-    <p class="header-sub-jp">奉 納 橋 ・ HŌNŌ-BASHI</p>
+    <p class="header-sub-jp">Ryu Development | Donation Gate</p>
     <h1 class="header-kanji">寄付通知</h1>
     <p class="header-latin">Donation Bridge — Instant Notification System</p>
 
