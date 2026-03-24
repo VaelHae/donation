@@ -10,15 +10,26 @@ app.use(cors());
  
 // ─── CONFIG ──────────────────────────────────────────────────
 const PORT                = process.env.PORT                || 3000;
-const ROBLOX_API_KEY      = process.env.ROBLOX_API_KEY      || 'uggCUWnR3kOygNZW8JkDb074FKz3F9+pl/vCubcjgUHSZoh3ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUpTYjJKc2IzaEpiblJsY201aGJDSXNJbWx6Y3lJNklrTnNiM1ZrUVhWMGFHVnVkR2xqWVhScGIyNVRaWEoyYVdObElpd2lZbUZ6WlVGd2FVdGxlU0k2SW5WblowTlZWMjVTTTJ0UGVXZE9XbGM0U210RVlqQTNORVpMZWpOR09TdHdiQzkyUTNWaVkycG5WVWhUV205b015SXNJbTkzYm1WeVNXUWlPaUkxTXpZMU9Ea3dOREU0SWl3aVpYaHdJam94TnpjME16STBPREl4TENKcFlYUWlPakUzTnpRek1qRXlNakVzSW01aVppSTZNVGMzTkRNeU1USXlNWDAuZldGOF9aNDNpRmlJaUx1MllhY0JsNktHM09yVXBMd2JKbGRFcnhsekpEdkxDLWctd0ZmUldIMW8yZU1oOG82VzVsZkpPNTFsc3pLZFpZUFEyTHJISlZnajVaMWN6bmhSbW5STEJzdTB6R3hkYXlCU3MxU0x1amtVSHJiM050N1NhLU5KREpyWjNkNXdRN2FLR2o2Z1hwYlh2TGE5eDNxRWZBUXFxYVItQ1Vmdzd4SklsLU1XYkNoS0dlczBHdDlqZ09DUUk4V2xQWWZ5bm51d05UZVZWQVYwbGc0SzloZ2pyVjVTeUoybWFMTWF5eHMwTHd6VmFnZ2Y3c0dpbTd0WE9pYmZPbXdDa244c25rSlRnUWVUb25qYVlHTGZNRWlMcGJDbEhKdkFGLVZ1TUVORTN6SkVMTGFSc2tVc21oejJLUGh0SEdqblJCZ0o2cTZfMzJGdlRR'; // MessagingService
-const ROBLOX_ASSET_API_KEY= process.env.ROBLOX_ASSET_API_KEY|| 'mKw2MOIaEE2A6WJifX74c+M+hPwe/T/IWYZ9i7Atn/AchnhcZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUpTYjJKc2IzaEpiblJsY201aGJDSXNJbWx6Y3lJNklrTnNiM1ZrUVhWMGFHVnVkR2xqWVhScGIyNVRaWEoyYVdObElpd2lZbUZ6WlVGd2FVdGxlU0k2SW0xTGR6Sk5UMGxoUlVVeVFUWlhTbWxtV0RjMFl5dE5LMmhRZDJVdlZDOUpWMWxhT1drM1FYUnVMMEZqYUc1b1l5SXNJbTkzYm1WeVNXUWlPaUkxTXpZMU9Ea3dOREU0SWl3aVpYaHdJam94TnpjME16STFOek15TENKcFlYUWlPakUzTnpRek1qSXhNeklzSW01aVppSTZNVGMzTkRNeU1qRXpNbjAuWENQb1pLNVJ6bk1MWUxxTXduS2V5QmExUUZiem1zNzNIOFFjTHNyT0IzQ0swc1UzWjFiVGJFMmdGVjRsU284bV8wenlqWHBNNGJVSmhseHhLM0NNVmk5YkNDTFpINEViUGVCYm9MSDcwT1I0R0VMXy11TF82SXpGRU8xbEtSRmJsS1Bjc1pyUHdILXBtTnVVQ0xzNVgtVFJHSy1GRWlqOXgyaGhsRlJwWUpYMDJ4LUF2VG1FaVU3d3Bvd2dYSERXMjdCSGh6c1BFZXRKYXR0bGY0WXFMdFlYbkJ4Q0tjdjZMZWY0U3NqNHVNREIzOHRqX3o0bDBKUm5OU2ZCQ005RFNxZGVOM0lORXJKWW5pTmh1WmI5VkRGRGF0SkM2blQ2RENRbWxydVlySWNSbmpVbXE3TFN6ZzVmOGp3YlkyT1ZfU3BTT25LUzRPbE11MHFJVnJ5UDBR'; // Assets API (bisa sama atau beda)
-const UNIVERSE_ID     = process.env.UNIVERSE_ID      || '9926763102';
-const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || '';
-const ROBLOX_USER_ID  = process.env.ROBLOX_USER_ID  || '5365890418';   // ← BARU: User ID Roblox kamu
+const ROBLOX_API_KEY      = process.env.ROBLOX_API_KEY      || 'uggCUWnR3kOygNZW8JkDb4DCImgkjDye9Fhwf6rP886vFoptZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUpTYjJKc2IzaEpiblJsY201aGJDSXNJbWx6Y3lJNklrTnNiM1ZrUVhWMGFHVnVkR2xqWVhScGIyNVRaWEoyYVdObElpd2lZbUZ6WlVGd2FVdGxlU0k2SW5WblowTlZWMjVTTTJ0UGVXZE9XbGM0U210RVlqUkVRMGx0WjJ0cVJIbGxPVVpvZDJZMmNsQTRPRFoyUm05d2RDSXNJbTkzYm1WeVNXUWlPaUkxTXpZMU9Ea3dOREU0SWl3aVpYaHdJam94TnpjME16TTBPREE0TENKcFlYUWlPakUzTnpRek16RXlNRGdzSW01aVppSTZNVGMzTkRNek1USXdPSDAuSDAzMTBzWE81bmg5N2hYVk5TcVRuZG13Vkx3dnZwSVZ0b1d0SFFPOEx0dFpYMjV3ekVZeDdWc1BHOEpUOHZ5QjNTWHJKMkc5OEpILUxGSFlvMmVrZE02aEVHcTA1dUswd19TZVdpR2w1UGg4S1pqckRxVmU4SGptam5CVE9hNXdVSFdxb3k2WW1DOEw0VnF1ajd5d0VVa0xVUWU1X0o0QXU2SUFMNlVHU19hNXhCWUhjRGc3cmZXNEpyX2FXNU5NMzZLVW9wQzRONEo3M0ZCcEZHY2VxUUNLYjQ4SkhEM1JDUmZjcDdvdzV4UzJOYkg5REtISUFHXzlfX0oyWEg2amNzQktqQmFldG0xSGhMNVBlaE10cGtyNG1TdXpXOVhWc1ZYWFJxVkd5bk5hOFI5dmxPdUE0OTRxSEJxODlKZ1RfWHk5bGNWR2dOcmFoWVh0aHNXVWp3';
+const ROBLOX_ASSET_API_KEY= process.env.ROBLOX_ASSET_API_KEY|| 'vw+t9fQ7pUa7VPg+r/dkFj35rogH+fNI7eIUvZg3JJqjGJOlZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkluTnBaeTB5TURJeExUQTNMVEV6VkRFNE9qVXhPalE1V2lJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaGRXUWlPaUpTYjJKc2IzaEpiblJsY201aGJDSXNJbWx6Y3lJNklrTnNiM1ZrUVhWMGFHVnVkR2xqWVhScGIyNVRaWEoyYVdObElpd2lZbUZ6WlVGd2FVdGxlU0k2SW5aM0szUTVabEUzY0ZWaE4xWlFaeXR5TDJSclJtb3pOWEp2WjBnclprNUpOMlZKVlhaYVp6TktTbkZxUjBwUGJDSXNJbTkzYm1WeVNXUWlPaUkxTXpZMU9Ea3dOREU0SWl3aVpYaHdJam94TnpjME16TTBPRFF5TENKcFlYUWlPakUzTnpRek16RXlORElzSW01aVppSTZNVGMzTkRNek1USTBNbjAuRDAzR1VXaXI0c0FfZlR4cDNLODVaeURKWFdMZmJOcHV6RU8yTkRueTE3VVN6SEQ2dThmNl9tVzFXcDFkQlZGRVM5UjYxdFA1RjI5eW1XelIxYXNfaXVFNm9PNVdLRkg2V3FuY2JwZ1hZdENBblEwS1ZwT25hYUNhaUxSSmo3NkhfMGFzdGdmY3YzbjlDSlZMS29IOXcwb1ZjWUpiR3lPWENtUjhPeUlhMDJoN3pVcEFPVk9GS2ZCSEdrZjVMWlpDOVE1MHhwcFpHM3BPSjFpYnEtUy1IeEdBNDI3dXI1VDVCb2dGMHhkTjFtd3FjWlgwd285bEZsS2JhSlZaYkZOMDFlazM2dmY0Zy1WLXI2TU1iOFlzNk1iQldiOEFrdmtpNjJGLUlfNGdia1BWTVo4UTQ1N0xlWDZYUlI4UkFkcVdWdzZJVHpYOUhCX3FOcXJqUFlMZHVB';
+const UNIVERSE_ID         = process.env.UNIVERSE_ID         || '9926763102';
+const WEBHOOK_SECRET      = process.env.WEBHOOK_SECRET      || '';
+
+// ─── GROUP CONFIG (Ganti User ID → Group ID) ─────────────────
+// Set ROBLOX_GROUP_ID di Railway env var
+// Kosongkan ROBLOX_USER_ID jika pakai group
+const ROBLOX_GROUP_ID     = process.env.ROBLOX_GROUP_ID     || '637138739';   // ← GROUP ID kamu
+const ROBLOX_USER_ID      = process.env.ROBLOX_USER_ID      || '';   // ← kosongkan jika pakai group
+
 const TTS_VOICE           = process.env.TTS_VOICE           || 'Salli';
 const TTS_LANG            = process.env.TTS_LANG            || 'id';
 const TTS_ENABLED         = process.env.TTS_ENABLED         !== 'false';
  
+// Tentukan mode: GROUP atau USER
+const USE_GROUP   = !!ROBLOX_GROUP_ID;
+const CREATOR_ID  = USE_GROUP ? ROBLOX_GROUP_ID : ROBLOX_USER_ID;
+const CREATOR_TYPE= USE_GROUP ? 'group' : 'user';
+
 // Asset API key fallback ke messaging key jika tidak di-set terpisah
 const ASSET_KEY = ROBLOX_ASSET_API_KEY || ROBLOX_API_KEY;
  
@@ -26,8 +37,8 @@ console.log('='.repeat(60));
 console.log('[CONFIG] UNIVERSE_ID         :', UNIVERSE_ID    || '❌ BELUM DISET');
 console.log('[CONFIG] ROBLOX_API_KEY      :', ROBLOX_API_KEY      ? `✅ (${ROBLOX_API_KEY.length} chars)` : '❌ BELUM DISET');
 console.log('[CONFIG] ROBLOX_ASSET_API_KEY:', ROBLOX_ASSET_API_KEY? `✅ (${ROBLOX_ASSET_API_KEY.length} chars)` : '⚠️  tidak diset (pakai ROBLOX_API_KEY)');
-console.log('[CONFIG] ROBLOX_USER_ID      :', ROBLOX_USER_ID || '❌ BELUM DISET');
-console.log('[CONFIG] TTS                 :', TTS_ENABLED && ROBLOX_USER_ID ? '✅ ENABLED' : '❌ DISABLED');
+console.log('[CONFIG] CREATOR MODE        :', USE_GROUP ? `✅ GROUP (${ROBLOX_GROUP_ID})` : ROBLOX_USER_ID ? `✅ USER (${ROBLOX_USER_ID})` : '❌ BELUM DISET');
+console.log('[CONFIG] TTS                 :', TTS_ENABLED && CREATOR_ID ? '✅ ENABLED' : '❌ DISABLED');
 console.log('='.repeat(60));
  
 // ─── HELPER ──────────────────────────────────────────────────
@@ -97,24 +108,32 @@ async function generateTTS(text) {
 }
  
 // ─── ROBLOX ASSETS: UPLOAD ────────────────────────────────────
-// PENTING: ASSET_KEY harus punya permission "Assets API → asset:write"
-// yang dikonfigurasi untuk USER (bukan experience)
+// Mendukung GROUP creator maupun USER creator
+// Untuk group: API key harus dibuat di Group → Creator Hub → API Keys
+//              dengan permission "Assets API → asset:write"
 async function uploadToRoblox(buf, name) {
-  if (!ROBLOX_USER_ID) throw new Error('ROBLOX_USER_ID belum diset');
-  if (!ASSET_KEY)      throw new Error('API Key untuk Assets belum diset');
+  if (!CREATOR_ID) throw new Error(
+    USE_GROUP
+      ? 'ROBLOX_GROUP_ID belum diset'
+      : 'ROBLOX_USER_ID belum diset (atau set ROBLOX_GROUP_ID untuk mode group)'
+  );
+  if (!ASSET_KEY) throw new Error('API Key untuk Assets belum diset');
  
   const form = new FormData();
- 
-  // ⚠️  creationContext.creator HARUS pakai userId sebagai STRING
-  //     dan tidak boleh ada field lain selain userId di dalam creator
+
+  // ─── Buat creationContext sesuai mode ─────────────────────
+  // Mode GROUP: { creator: { groupId: "12345" } }
+  // Mode USER : { creator: { userId:  "12345" } }
+  const creatorField = USE_GROUP
+    ? { groupId: String(CREATOR_ID) }
+    : { userId:  String(CREATOR_ID) };
+
   const requestBody = {
     assetType:   'Audio',
     displayName: name.substring(0, 50),
     description: 'Donation TTS',
     creationContext: {
-      creator: {
-        userId: String(ROBLOX_USER_ID),
-      },
+      creator: creatorField,
     },
   };
  
@@ -128,9 +147,9 @@ async function uploadToRoblox(buf, name) {
     knownLength: buf.length,
   });
  
-  console.log('[UPLOAD] Uploading ke Roblox Open Cloud...');
-  console.log('[UPLOAD] userId:', ROBLOX_USER_ID, '| size:', (buf.length/1024).toFixed(1), 'KB');
- 
+  console.log(`[UPLOAD] Mode: ${CREATOR_TYPE.toUpperCase()} | ID: ${CREATOR_ID} | Size: ${(buf.length/1024).toFixed(1)} KB`);
+  console.log('[UPLOAD] Request body:', JSON.stringify(requestBody));
+
   let resp;
   try {
     resp = await axios.post('https://apis.roblox.com/assets/v1/assets', form, {
@@ -142,17 +161,21 @@ async function uploadToRoblox(buf, name) {
   } catch (err) {
     const status  = err.response?.status;
     const body    = JSON.stringify(err.response?.data || '');
- 
+
     if (status === 401) {
-      throw new Error(
-        `401 Unauthorized saat upload asset.\n` +
-        `Kemungkinan penyebab:\n` +
-        `1. API Key belum punya permission "Assets API > asset:write"\n` +
-        `2. Permission sudah ditambah tapi API Key belum di-save ulang\n` +
-        `3. Pakai API Key yang sama untuk Messaging & Assets — coba buat API Key baru\n` +
-        `4. ROBLOX_USER_ID (${ROBLOX_USER_ID}) tidak cocok dengan pemilik API Key\n` +
-        `Detail Roblox: ${body}`
-      );
+      const tips = USE_GROUP
+        ? [
+            `API Key harus dibuat dari halaman GROUP di Creator Hub (bukan dari akun personal)`,
+            `Buka roblox.com → Creator Hub → pilih Group kamu → API Keys → buat key baru`,
+            `Permission yang dibutuhkan: "Assets API → asset:write"`,
+            `ROBLOX_GROUP_ID (${ROBLOX_GROUP_ID}) harus sesuai dengan group pemilik API Key`,
+          ]
+        : [
+            `API Key belum punya permission "Assets API > asset:write"`,
+            `Coba buat API Key baru, atau pisahkan key untuk Assets dan Messaging`,
+            `ROBLOX_USER_ID (${ROBLOX_USER_ID}) harus cocok dengan pemilik API Key`,
+          ];
+      throw new Error(`401 Unauthorized saat upload asset.\nTips:\n${tips.map(t => '• ' + t).join('\n')}\nDetail Roblox: ${body}`);
     }
     if (status === 403) throw new Error(`403 Forbidden: API Key tidak punya akses asset:write. Body: ${body}`);
     if (status === 400) throw new Error(`400 Bad Request: ${body}`);
@@ -197,7 +220,7 @@ async function waitForAsset(opId, timeoutMs = 120_000) {
  
 // ─── TTS PIPELINE ─────────────────────────────────────────────
 async function runTTSPipeline({ username, amount, message, timestamp }) {
-  if (!TTS_ENABLED || !ROBLOX_USER_ID || !ASSET_KEY) return;
+  if (!TTS_ENABLED || !CREATOR_ID || !ASSET_KEY) return;
  
   const words = amountToWords(amount);
   let ttsText = `${username} berdonasi ${words}`;
@@ -219,7 +242,6 @@ async function runTTSPipeline({ username, amount, message, timestamp }) {
 }
  
 // ─── DIAGNOSA ENDPOINT ────────────────────────────────────────
-// GET /diagnose — tes setiap komponen satu per satu
 app.get('/diagnose', async (req, res) => {
   const results = {};
  
@@ -228,11 +250,20 @@ app.get('/diagnose', async (req, res) => {
     UNIVERSE_ID:          UNIVERSE_ID         ? '✅ ada' : '❌ KOSONG',
     ROBLOX_API_KEY:       ROBLOX_API_KEY      ? `✅ ada (${ROBLOX_API_KEY.length} chars)` : '❌ KOSONG',
     ROBLOX_ASSET_API_KEY: ROBLOX_ASSET_API_KEY? `✅ ada terpisah` : '⚠️ pakai ROBLOX_API_KEY',
-    ROBLOX_USER_ID:       ROBLOX_USER_ID      ? `✅ ${ROBLOX_USER_ID}` : '❌ KOSONG',
-    asset_key_same_as_msg: ROBLOX_ASSET_API_KEY === '' || ROBLOX_ASSET_API_KEY === ROBLOX_API_KEY,
+    CREATOR_MODE:         USE_GROUP
+                            ? `✅ GROUP (${ROBLOX_GROUP_ID})`
+                            : ROBLOX_USER_ID
+                              ? `✅ USER (${ROBLOX_USER_ID})`
+                              : '❌ KOSONG — set ROBLOX_GROUP_ID atau ROBLOX_USER_ID',
+    ROBLOX_GROUP_ID:      ROBLOX_GROUP_ID     ? `✅ ${ROBLOX_GROUP_ID}` : '— (tidak diset)',
+    ROBLOX_USER_ID:       ROBLOX_USER_ID      ? `✅ ${ROBLOX_USER_ID}` : '— (tidak diset)',
   };
+
+  results.setup_guide = USE_GROUP
+    ? 'MODE GROUP: Pastikan API key dibuat dari halaman group di Creator Hub dengan permission Assets API > asset:write'
+    : 'MODE USER: Pastikan API key dibuat dari akun personal di Creator Hub dengan permission Assets API > asset:write';
  
-  // 2. Test MessagingService (pakai test topic agar tidak trigger game)
+  // 2. Test MessagingService
   try {
     const url = `https://apis.roblox.com/messaging-service/v1/universes/${UNIVERSE_ID}/topics/DiagnoseTest`;
     await axios.post(url, { message: JSON.stringify({ test: true }) }, {
@@ -244,31 +275,35 @@ app.get('/diagnose', async (req, res) => {
     results.messaging_service = `❌ GAGAL HTTP ${e.response?.status}: ${JSON.stringify(e.response?.data || e.message)}`;
   }
  
-  // 3. Test Assets API — cek apakah API key valid untuk asset:write
-  //    Caranya: kirim request kosong, Roblox akan error 400 (bukan 401)
-  //    HTTP 400 = key valid, 401 = key tidak valid/kurang permission
-  if (ROBLOX_USER_ID) {
+  // 3. Test Assets API
+  if (CREATOR_ID) {
     try {
-      // Kirim multipart kosong — jika 401 artinya key masalah, 400 artinya key OK tapi request kurang
+      const creatorField = USE_GROUP
+        ? { groupId: String(CREATOR_ID) }
+        : { userId:  String(CREATOR_ID) };
+
       const form = new FormData();
       form.append('request', JSON.stringify({
         assetType: 'Audio',
         displayName: 'diagnose_test',
-        creationContext: { creator: { userId: String(ROBLOX_USER_ID) } },
+        creationContext: { creator: creatorField },
       }), { contentType: 'application/json' });
       // tidak lampirkan file audio → Roblox akan 400 jika key valid
- 
+
       await axios.post('https://apis.roblox.com/assets/v1/assets', form, {
         headers: { ...form.getHeaders(), 'x-api-key': ASSET_KEY },
         timeout: 10000,
-        validateStatus: () => true, // terima semua status
+        validateStatus: () => true,
       }).then(r => {
         if (r.status === 400 || r.status === 200) {
-          results.assets_api = `✅ API Key valid (HTTP ${r.status} — key diterima)`;
+          results.assets_api = `✅ API Key valid (HTTP ${r.status} — key diterima, creator: ${CREATOR_TYPE})`;
         } else if (r.status === 401) {
-          results.assets_api = `❌ HTTP 401 — API Key tidak valid atau kurang permission asset:write.\nDetail: ${JSON.stringify(r.data)}`;
+          const hint = USE_GROUP
+            ? 'Buat API Key dari halaman GROUP di Creator Hub (bukan akun personal)!'
+            : 'Buat API Key baru dengan permission asset:write di Creator Hub!';
+          results.assets_api = `❌ HTTP 401 — ${hint}\nDetail: ${JSON.stringify(r.data)}`;
         } else if (r.status === 403) {
-          results.assets_api = `❌ HTTP 403 — API Key tidak punya akses.\nDetail: ${JSON.stringify(r.data)}`;
+          results.assets_api = `❌ HTTP 403 — API Key tidak punya akses asset:write.\nDetail: ${JSON.stringify(r.data)}`;
         } else {
           results.assets_api = `⚠️ HTTP ${r.status}: ${JSON.stringify(r.data).substring(0,200)}`;
         }
@@ -277,13 +312,15 @@ app.get('/diagnose', async (req, res) => {
       results.assets_api = `❌ Request error: ${e.message}`;
     }
   } else {
-    results.assets_api = '⚠️ Skip — ROBLOX_USER_ID belum diset';
+    results.assets_api = '⚠️ Skip — ROBLOX_GROUP_ID dan ROBLOX_USER_ID belum diset';
   }
  
   results.suggestion = results.assets_api?.includes('401')
-    ? 'SOLUSI: Buat API Key BARU di Creator Hub dengan permission "Assets API > asset:write", lalu set sebagai ROBLOX_ASSET_API_KEY di Railway'
+    ? USE_GROUP
+      ? 'SOLUSI GROUP: Buka roblox.com → Creator Hub → pilih Group → API Keys → buat key baru dengan "Assets API > asset:write"'
+      : 'SOLUSI USER: Buat API Key BARU di Creator Hub dengan permission "Assets API > asset:write", set sebagai ROBLOX_ASSET_API_KEY di Railway'
     : 'Semua OK!';
- 
+
   console.log('[DIAGNOSE]', JSON.stringify(results, null, 2));
   res.json(results);
 });
@@ -310,7 +347,7 @@ async function processDonation(username, message, amount, isTest = false) {
   };
   const code = await publishToRoblox(payload, 'DonationNotification');
   console.log(`[DONATION] ✅ (${code}): ${username} | ${formatRupiah(amount)}`);
-  const canTTS = TTS_ENABLED && !!ROBLOX_USER_ID && !!ASSET_KEY;
+  const canTTS = TTS_ENABLED && !!CREATOR_ID && !!ASSET_KEY;
   if (canTTS) setImmediate(() => runTTSPipeline({ username, amount, message, timestamp: ts }).catch(() => {}));
   return { success: true, tts_processing: canTTS };
 }
@@ -364,7 +401,7 @@ h1{font-size:clamp(24px,5vw,46px);font-weight:800;background:linear-gradient(135
 .lt{color:var(--muted);margin-right:5px}
 .dr{display:flex;align-items:flex-start;gap:8px;padding:7px 0;border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px}
 .dr:last-child{border-bottom:none}
-.dk{color:var(--muted);min-width:180px;flex-shrink:0;margin-top:1px}
+.dk{color:var(--muted);min-width:200px;flex-shrink:0;margin-top:1px}
 .dv{color:var(--text);flex:1;word-break:break-all}
 .dv.g{color:var(--green)}.dv.r{color:var(--red)}.dv.w{color:var(--gold)}
 .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
@@ -381,16 +418,49 @@ h1{font-size:clamp(24px,5vw,46px);font-weight:800;background:linear-gradient(135
 .alert.warn{background:rgba(255,210,51,.07);border:1px solid rgba(255,210,51,.3);color:var(--gold)}
 .alert.err{background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3);color:var(--red)}
 .alert.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.3);color:var(--green)}
+.guide-box{background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.25);border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:12px;line-height:1.8}
+.guide-box h4{color:var(--blue);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.guide-box ol{margin-left:16px;color:var(--muted)}
+.guide-box ol li{margin-bottom:4px}
+.guide-box code{background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="badge">⚡ DONATION BRIDGE v4</div>
+    <div class="badge">⚡ DONATION BRIDGE v5 — GROUP MODE</div>
     <h1>Dashboard Testing</h1>
-    <p class="sub">Notif instan • Suara AI via Roblox Open Cloud</p>
+    <p class="sub">Notif instan • Suara AI via Roblox Open Cloud • Group Assets</p>
   </header>
   <div class="grid">
+
+    <!-- SETUP GUIDE GROUP -->
+    <div class="card cf">
+      <div class="ct">📖 Setup Guide — Group API Key</div>
+      <div class="guide-box">
+        <h4>Cara setup API Key untuk Group (agar TTS bisa upload audio)</h4>
+        <ol>
+          <li>Buka <strong>roblox.com</strong> → login sebagai owner/admin group</li>
+          <li>Buka <strong>Creator Hub</strong> → di pojok kiri atas, ganti dropdown dari nama akunmu ke <strong>nama group</strong></li>
+          <li>Pilih menu <strong>API Keys</strong> → klik <strong>Create API Key</strong></li>
+          <li>Nama key: bebas (misal <code>DonationBridge</code>)</li>
+          <li>Di bagian <strong>Access Permissions</strong>:
+            <ul style="margin-left:16px;margin-top:4px">
+              <li>Tambah <code>Assets API</code> → centang <code>asset:read</code> dan <code>asset:write</code></li>
+              <li>Tambah <code>Messaging Service API</code> → centang <code>universe-messaging-service:publish</code></li>
+            </ul>
+          </li>
+          <li>Di bagian <strong>Accepted IP Addresses</strong>: isi IP Railway atau biarkan kosong (allow all)</li>
+          <li>Klik <strong>Save &amp; Generate Key</strong> → copy API key-nya</li>
+          <li>Di Railway env vars: set <code>ROBLOX_ASSET_API_KEY</code> = key group tadi</li>
+          <li>Set <code>ROBLOX_GROUP_ID</code> = ID group kamu (angka di URL group)</li>
+          <li>Kosongkan <code>ROBLOX_USER_ID</code> (atau hapus env var-nya)</li>
+        </ol>
+      </div>
+      <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace">
+        💡 Group ID bisa dilihat di URL: roblox.com/groups/<strong style="color:var(--gold)">12345678</strong>/NamaGroup
+      </div>
+    </div>
  
     <!-- DIAGNOSA -->
     <div class="card cf">
@@ -399,12 +469,15 @@ h1{font-size:clamp(24px,5vw,46px);font-weight:800;background:linear-gradient(135
       <div id="diagRows">
         <div class="dr"><span class="dk">Status</span><span class="dv" id="dStatus">Memuat...</span></div>
         <div class="dr"><span class="dk">UNIVERSE_ID</span><span class="dv" id="dUniv">—</span></div>
-        <div class="dr"><span class="dk">ROBLOX_API_KEY</span><span class="dv" id="dMsgKey">—</span></div>
+        <div class="dr"><span class="dk">ROBLOX_API_KEY (Messaging)</span><span class="dv" id="dMsgKey">—</span></div>
         <div class="dr"><span class="dk">ROBLOX_ASSET_API_KEY</span><span class="dv" id="dAssetKey">—</span></div>
+        <div class="dr"><span class="dk">Creator Mode</span><span class="dv" id="dCreator">—</span></div>
+        <div class="dr"><span class="dk">ROBLOX_GROUP_ID</span><span class="dv" id="dGroupId">—</span></div>
         <div class="dr"><span class="dk">ROBLOX_USER_ID</span><span class="dv" id="dUserId">—</span></div>
         <div class="dr"><span class="dk">MessagingService</span><span class="dv" id="dMsg">—</span></div>
-        <div class="dr"><span class="dk">Assets API (401 fix)</span><span class="dv" id="dAssets">—</span></div>
+        <div class="dr"><span class="dk">Assets API</span><span class="dv" id="dAssets">—</span></div>
         <div class="dr"><span class="dk">TTS</span><span class="dv" id="dTts">—</span></div>
+        <div class="dr"><span class="dk">Setup Guide</span><span class="dv w" id="dGuide">—</span></div>
         <div class="dr"><span class="dk">Webhook URL</span><span class="dv w" id="dWebhook">—</span> <button class="bsm" onclick="copyWH()">📋</button></div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
@@ -474,22 +547,28 @@ async function runDiag(){
     sv('dUniv', d.config.UNIVERSE_ID, d.config.UNIVERSE_ID.startsWith('✅')?'g':'r');
     sv('dMsgKey', d.config.ROBLOX_API_KEY, d.config.ROBLOX_API_KEY.startsWith('✅')?'g':'r');
     sv('dAssetKey', d.config.ROBLOX_ASSET_API_KEY, 'w');
-    sv('dUserId', d.config.ROBLOX_USER_ID, d.config.ROBLOX_USER_ID.startsWith('✅')?'g':'r');
+    sv('dCreator', d.config.CREATOR_MODE, d.config.CREATOR_MODE.startsWith('✅')?'g':'r');
+    sv('dGroupId', d.config.ROBLOX_GROUP_ID || '— tidak diset', d.config.ROBLOX_GROUP_ID?.startsWith('✅')?'g':'w');
+    sv('dUserId', d.config.ROBLOX_USER_ID || '— tidak diset', d.config.ROBLOX_USER_ID?.startsWith('✅')?'g':'w');
     sv('dMsg', d.messaging_service, d.messaging_service.startsWith('✅')?'g':'r');
     sv('dAssets', d.assets_api, d.assets_api?.startsWith('✅')?'g':d.assets_api?.startsWith('⚠️')?'w':'r');
-    sv('dTts', d.config.ROBLOX_USER_ID.startsWith('✅') && d.assets_api?.startsWith('✅') ?'✅ Siap':'❌ Belum bisa jalan',
-       d.config.ROBLOX_USER_ID.startsWith('✅') && d.assets_api?.startsWith('✅')?'g':'r');
+    sv('dGuide', d.setup_guide || '—', 'w');
+    sv('dTts', d.config.CREATOR_MODE?.startsWith('✅') && d.assets_api?.startsWith('✅') ?'✅ Siap':'❌ Belum bisa jalan',
+       d.config.CREATOR_MODE?.startsWith('✅') && d.assets_api?.startsWith('✅')?'g':'r');
     sv('dWebhook', B+'/webhook/bagibagi','w');
  
     document.getElementById('sDot').className='dot on';
     document.getElementById('sTxt').textContent='✅ Diagnosa selesai';
  
-    // Tampilkan alert jika ada masalah
     if(d.assets_api?.includes('401')){
+      const isGroup = d.config.CREATOR_MODE?.includes('GROUP');
       document.getElementById('diagAlert').innerHTML=
-        '<div class="alert err">❌ <b>401 pada Assets API</b> — API Key tidak punya permission asset:write yang benar.<br/>'+
-        '➡️ Solusi: Buat API Key BARU di Roblox Creator Hub, aktifkan <b>Assets API → asset:write</b>, lalu tambahkan sebagai <b>ROBLOX_ASSET_API_KEY</b> di Railway.</div>';
-      log('❌ 401 Assets API: Buat API Key baru dengan permission asset:write → set ROBLOX_ASSET_API_KEY di Railway','er');
+        '<div class="alert err">❌ <b>401 pada Assets API</b><br/>'+
+        (isGroup
+          ? '➡️ Pastikan API Key dibuat dari halaman <b>GROUP</b> di Creator Hub (bukan akun personal).<br/>Lihat panduan setup di atas.'
+          : '➡️ Buat API Key baru di Creator Hub dengan permission <b>Assets API → asset:write</b>, set sebagai <b>ROBLOX_ASSET_API_KEY</b>.')
+        +'</div>';
+      log('❌ 401 Assets API: Lihat panduan setup di card atas','er');
     } else if(d.assets_api?.startsWith('✅')){
       document.getElementById('diagTtsBtn').style.display='';
       log('✅ Assets API OK — TTS siap jalan!','ok');
@@ -574,19 +653,21 @@ app.get('/', (req, res) => res.redirect('/dashboard'));
  
 app.get('/health', (req, res) => res.json({
   status:      'online',
-  service:     'BagiBagi → Roblox Bridge v4',
-  tts_enabled: TTS_ENABLED && !!ROBLOX_USER_ID && !!ASSET_KEY,
+  service:     'BagiBagi → Roblox Bridge v5',
+  tts_enabled: TTS_ENABLED && !!CREATOR_ID && !!ASSET_KEY,
+  creator_mode: CREATOR_TYPE,
   config: {
     universe_id:       UNIVERSE_ID || '',
     api_key_set:       !!ROBLOX_API_KEY,
     asset_api_key_set: !!ROBLOX_ASSET_API_KEY,
+    group_id_set:      !!ROBLOX_GROUP_ID,
     user_id_set:       !!ROBLOX_USER_ID,
     tts_voice:         TTS_VOICE,
   },
 }));
  
 app.post('/tts-test', async (req, res) => {
-  if (!ROBLOX_USER_ID) return res.status(400).json({ error: 'ROBLOX_USER_ID belum diset' });
+  if (!CREATOR_ID) return res.status(400).json({ error: 'ROBLOX_GROUP_ID atau ROBLOX_USER_ID belum diset' });
   const text = req.body?.text || 'Test TTS berhasil!';
   res.json({ started: true, text });
   setImmediate(async () => {
