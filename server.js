@@ -123,7 +123,7 @@ const DASHBOARD_HTML = `<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Donation Bridge — Instant Mode</title>
+<title>Ryu | Donation Bridge — Instant Mode</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -227,12 +227,12 @@ h1{font-size:clamp(24px,5vw,46px);font-weight:800;background:linear-gradient(135
         <button class="pb" onclick="sa(1000000)">1jt</button>
       </div>
       <div class="fi"><label>Pesan (opsional)</label><textarea id="ms">Semangat streamnya kak!</textarea></div>
-      <button class="bs" id="sBtn" onclick="sendTest()">🚀 Kirim Test</button>
+      <button class="bs" id="sBtn" onclick="sendTest()">🚀 Submit</button>
       <div class="res" id="res"></div>
     </div>
 
     <div class="card">
-      <div class="ct" style="justify-content:space-between"><span>📋 Log</span><button class="bsm" onclick="cl()">Hapus</button></div>
+      <div class="ct" style="justify-content:space-between"><span>📋 Logs</span><button class="bsm" onclick="cl()">Hapus</button></div>
       <div id="log"><div class="le in"><span class="lt">--:--:--</span>Siap.</div></div>
     </div>
 
@@ -326,7 +326,8 @@ async function batch(n){
 runDiag();
 </script>
 </body>
-</html>`;
+</html>
+`;
 
 // ─── ROUTES ──────────────────────────────────────────────────
 app.get('/dashboard', (req, res) => {
